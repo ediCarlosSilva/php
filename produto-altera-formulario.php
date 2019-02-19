@@ -1,0 +1,27 @@
+<?php require_once("cabecalho.php");
+require_once("banco-categorias.php"); 
+require_once("banco-produtos.php");
+
+$id = $_GET['id'];
+$produto = buscaProduto($conexao, $id);
+
+$usado = $produto['usado'] ? "checked='checked'" : "";
+
+$categorias = listaCategorias($conexao);
+?>
+
+    <h1>Alteração de cadastro</h1>
+    <form action="altera-produto.php" method="post">
+        <input type="hidden" name="id" value="<?= $produto['id'] ?>">
+        
+        <?php include("produto-formulario-base.php");?>
+            <tr>
+                <td>
+                    <button class="btn btn-primary" type="submit">Alterar</button>
+                </td>
+            </tr>
+           
+        </table>       
+    </form>
+<?php include("rodape.php") ?>
+
